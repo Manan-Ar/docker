@@ -13,19 +13,19 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
 
-            .card {
-                background: white;
-                padding: 20px;
-                border-radius: 10px;
-                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-                transition: transform 0.2s ease, box-shadow 0.2s ease;
-            }
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
 
-            .card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
         }
 
         body {
@@ -93,13 +93,6 @@
             gap: 20px;
         }
 
-        .card {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-        }
-
         .card h2 {
             margin-bottom: 10px;
             font-size: 18px;
@@ -158,12 +151,8 @@
                 <h2>Overview</h2>
                 <p>
                     This project demonstrates containerization of a web application using Docker.
-                    Multiple services are isolated into containers and connected using Docker networking.
-                <p>
-                    This project demonstrates containerization of a web application using Docker.
                     Multiple services are isolated into containers and connected using Docker networking,
                     ensuring scalability, portability, and ease of deployment.
-                </p>
                 </p>
             </div>
 
@@ -248,42 +237,43 @@ volumes:
                 </ul>
             </div>
 
-            <div class="card">
-                <h2>Report Summary</h2>
-                <p>
-                    This project focuses on building a containerized web application using Docker, Node.js, and
-                    PostgreSQL.
-                    The backend and database are deployed in separate containers and managed using Docker Compose,
-                    which simplifies multi-service deployment.
-                </p>
-
-                <p>
-                    A multi-stage Docker build was implemented to optimize the final image size by removing unnecessary
-                    dependencies. This improves performance and reduces resource usage.
-                </p>
-
-                <p>
-                    Macvlan networking was used to assign individual IP addresses to containers, allowing them to behave
-                    like independent systems on the same network. This also highlights differences compared to bridge
-                    networking.
-                </p>
-
-                <p>
-                    To ensure data persistence, Docker volumes were used for the PostgreSQL database, so data remains
-                    intact
-                    even after container restarts.
-                </p>
-
-                <p>
-                    Overall, the project demonstrates practical understanding of containerization, service
-                    orchestration,
-                    networking, and deployment in a DevOps environment.
-                </p>
-            </div>
 
         </div>
 
     </div>
+
+    <hr style="max-width: 900px; margin: 40px auto; border: 0; border-top: 1px solid #ddd;">
+
+    <section style="max-width: 900px; margin: 50px auto; padding: 0 20px;">
+        <h2 style="margin-bottom: 10px;">Report Summary</h2>
+
+        <p>
+            This project focuses on building a containerized web application using Docker, Node.js, and PostgreSQL.
+            The backend and database are deployed in separate containers and managed using Docker Compose,
+            which simplifies multi-service deployment.
+        </p>
+
+        <p>
+            A multi-stage Docker build was implemented to optimize the final image size by removing unnecessary
+            dependencies. This improves performance and reduces resource usage.
+        </p>
+
+        <p>
+            Macvlan networking was used to assign individual IP addresses to containers, allowing them to behave
+            like independent systems on the same network. This also highlights differences compared to bridge
+            networking.
+        </p>
+
+        <p>
+            To ensure data persistence, Docker volumes were used for the PostgreSQL database, so data remains intact
+            even after container restarts.
+        </p>
+
+        <p>
+            Overall, the project demonstrates practical understanding of containerization, service orchestration,
+            networking, and deployment in a DevOps environment.
+        </p>
+    </section>
 
     <footer>
         <p>DevOps Assignment | UPES | 2026</p>
