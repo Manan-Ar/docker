@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DevOps Assignment 1</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #f7f7f7;
+    color: #222;
+    line-height: 1.6;
+}
+
+header {
+    text-align: center;
+    padding: 40px 20px 20px;
+}
+
+h1 { margin-bottom: 5px; font-weight: 600; }
+
+a.button {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 18px;
+    background: #333;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+nav {
+    text-align: center;
+    padding: 10px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+nav a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: #444;
+    font-weight: 500;
+}
+
+section {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+h2 {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    font-weight: 600;
+}
+
+code {
+    background: #eee;
+    padding: 10px;
+    display: block;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin-top: 10px;
+}
+
+.diagram {
+    background: #fafafa;
+    border: 1px dashed #ccc;
+    padding: 15px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    margin-top: 40px;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Containerization & DevOps Assignment</h1>
+<p>Submitted by Manan Arora</p>
+
+<a href="https://github.com/Manan-Ar/docker" target="_blank" class="button">
+View Project on GitHub
+</a>
+</header>
+
+<nav>
+<a href="#objective">Objective</a>
+<a href="#stack">Tech Stack</a>
+<a href="#architecture">Architecture</a>
+<a href="#api">API</a>
+<a href="#docker">Docker</a>
+<a href="#compose">Compose</a>
+<a href="#network">Networking</a>
+<a href="#report">Report</a>
+</nav>
+
+<section id="objective">
+<h2>Objective</h2>
+<p>
+This project demonstrates how a web application can be containerized using Docker.
+It focuses on isolating services, enabling communication between them, and simplifying deployment.
+</p>
+</section>
+
+<section id="stack">
+<h2>Technology Stack</h2>
+<ul>
+<li>Node.js (Backend)</li>
+<li>PostgreSQL (Database)</li>
+<li>Docker</li>
+<li>Docker Compose</li>
+<li>Macvlan / Ipvlan Networking</li>
+</ul>
+</section>
+
+<section id="architecture">
+<h2>Architecture</h2>
+<div class="diagram">
+Client → Backend Container → PostgreSQL Container
+</div>
+<p>
+Each component runs in a separate container. Communication is handled through Docker networking,
+while persistent data is stored using volumes.
+</p>
+</section>
+
+<section id="api">
+<h2>API Endpoints</h2>
+<ul>
+<li>POST /data</li>
+<li>GET /data</li>
+<li>GET /health</li>
+</ul>
+
+<code>
+app.post('/data', ...);
+app.get('/data', ...);
+app.get('/health', ...);
+</code>
+</section>
+
+<section id="docker">
+<h2>Docker Implementation</h2>
+<ul>
+<li>Multi-stage build used to optimize image size</li>
+<li>Alpine-based image for lightweight containers</li>
+<li>Non-root user improves security</li>
+</ul>
+
+<code>
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+
+FROM node:18-alpine
+WORKDIR /app
+COPY --from=builder /app .
+CMD ["node","server.js"]
+</code>
+</section>
+
+<section id="compose">
+<h2>Docker Compose</h2>
+
+<code>
+version: '3'
+services:
+  backend:
+    build: ./backend
+
+  db:
+    build: ./database
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+</code>
+</section>
+
+<section id="network">
+<h2>Networking</h2>
+<p>
+Macvlan networking assigns unique IP addresses to each container, allowing them to behave like
+independent systems on the same network.
+</p>
+
+<code>
+docker network create -d macvlan \
+--subnet=192.168.1.0/24 \
+--gateway=192.168.1.1 \
+-o parent=eth0 mynet
+</code>
+
+<p><b>Note:</b> Host cannot directly communicate with Macvlan containers.</p>
+</section>
+
+<section id="report">
+<h2>Report Summary</h2>
+<p>
+This project involved building a containerized web application using Docker, Node.js, and PostgreSQL.
+The backend and database were deployed in separate containers and managed using Docker Compose.
+A multi-stage build was used to optimize the image size and improve performance.
+</p>
+
+<p>
+Macvlan networking was implemented to assign separate IP addresses to containers, allowing them to
+function as independent systems. Persistent storage was achieved using Docker volumes, ensuring that
+data remains intact even after container restarts.
+</p>
+
+<p>
+The project helped in understanding key DevOps concepts such as containerization, networking,
+and service orchestration in a practical environment.
+</p>
+</section>
+
+<footer>
+<p>DevOps Assignment | UPES | 2026</p>
+</footer>
+
+</body>
+</html>
