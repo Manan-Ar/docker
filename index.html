@@ -13,6 +13,19 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+
+            .card {
+                background: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+                transition: transform 0.2s ease, box-shadow 0.2s ease;
+            }
+
+            .card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            }
         }
 
         body {
@@ -146,6 +159,11 @@
                 <p>
                     This project demonstrates containerization of a web application using Docker.
                     Multiple services are isolated into containers and connected using Docker networking.
+                <p>
+                    This project demonstrates containerization of a web application using Docker.
+                    Multiple services are isolated into containers and connected using Docker networking,
+                    ensuring scalability, portability, and ease of deployment.
+                </p>
                 </p>
             </div>
 
@@ -193,9 +211,22 @@ version: "3"
 services:
   backend:
     build: .
+    ports:
+      - "5000:5000"
+    depends_on:
+      - db
 
   db:
     image: postgres
+    environment:
+      POSTGRES_DB: appdb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
 </pre>
             </div>
 
