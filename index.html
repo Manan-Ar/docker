@@ -217,6 +217,39 @@ services:
                 </ul>
             </div>
 
+            <div class="card">
+                <h2>Report Summary</h2>
+                <p>
+                    This project focuses on building a containerized web application using Docker, Node.js, and
+                    PostgreSQL.
+                    The backend and database are deployed in separate containers and managed using Docker Compose,
+                    which simplifies multi-service deployment.
+                </p>
+
+                <p>
+                    A multi-stage Docker build was implemented to optimize the final image size by removing unnecessary
+                    dependencies. This improves performance and reduces resource usage.
+                </p>
+
+                <p>
+                    Macvlan networking was used to assign individual IP addresses to containers, allowing them to behave
+                    like independent systems on the same network. This also highlights differences compared to bridge
+                    networking.
+                </p>
+
+                <p>
+                    To ensure data persistence, Docker volumes were used for the PostgreSQL database, so data remains
+                    intact
+                    even after container restarts.
+                </p>
+
+                <p>
+                    Overall, the project demonstrates practical understanding of containerization, service
+                    orchestration,
+                    networking, and deployment in a DevOps environment.
+                </p>
+            </div>
+
         </div>
 
     </div>
